@@ -10,11 +10,10 @@ import smlee.springbootsample.domain.SampleDomain;
 import smlee.springbootsample.repository.SampleMemoryRepository;
 
 @Service
-// @RequiredArgsConstructor // 모든 final이 선언된 모든 필드에 대해 생성자 주입방식의 Bean 주입을 대신해준다.
-// @AutoWired를 사용할 필요가없다.
+@RequiredArgsConstructor // 모든 final이 선언된 모든 필드에 대해 생성자 주입방식의 Bean 주입을 대신해준다. @Autowired를 사용할 필요가없다.
 public class SampleService {
 
-    private final SampleMemoryRepository repository = new SampleMemoryRepository();
+    private final SampleMemoryRepository repository;
 
     public Long validateDuplicationOnSave(SampleDomain domain) {
 

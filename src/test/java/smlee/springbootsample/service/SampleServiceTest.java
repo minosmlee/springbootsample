@@ -6,10 +6,12 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 import smlee.springbootsample.domain.SampleDomain;
+import smlee.springbootsample.repository.SampleMemoryRepository;
 
 class SampleServiceTest {
 
-    SampleService service = new SampleService();
+    SampleMemoryRepository repository = new SampleMemoryRepository();
+    SampleService service = new SampleService(repository);
 
     @AfterEach
     public void afterEach() {
