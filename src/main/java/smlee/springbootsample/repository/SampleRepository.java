@@ -6,11 +6,11 @@ import java.util.Optional;
 import smlee.springbootsample.domain.SampleDomain;
 
 public interface SampleRepository {
-    SampleDomain save(SampleDomain domain);
+    public SampleDomain save(SampleDomain domain);
 
-    Optional<SampleDomain> findById(Long id);
+    public Optional<SampleDomain> findById(Long id);
 
-    Optional<SampleDomain> findByAttr(String attr);
+    public Optional<SampleDomain> findByAttr(String attr);
 
-    List<SampleDomain> findAll();
+    public List<SampleDomain> findAll();
 }

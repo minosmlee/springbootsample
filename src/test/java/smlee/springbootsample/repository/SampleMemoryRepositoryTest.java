@@ -2,14 +2,21 @@ package smlee.springbootsample.repository;
 
 import static org.assertj.core.api.Assertions.assertThat; // assertThat을 static import 하여 바로 assertThat()을 사용가능
 
+import javax.transaction.Transactional;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import smlee.springbootsample.domain.SampleDomain;
 
+@SpringBootTest
+@Transactional
 class SampleMemoryRepositoryTest {
 
-    SampleMemoryRepository repository = new SampleMemoryRepository();
+    @Autowired
+    SampleMemoryRepository repository;
 
     @AfterEach
     public void afterEach() {
@@ -22,8 +29,8 @@ class SampleMemoryRepositoryTest {
         domain.setAttr("test attr");
         repository.save(domain);
 
-        SampleDomain result = repository.findById(domain.getId())
-                .get(); // Optional 객체가 반환될때 .get()을 붙이면 null이 아닌경우 그 값을 가져오고, null 인경우 예외를 반환한다.
+        SampleDomain result = repository.findById(domain.getId()).get(); // Optional 객체가 반환될때 .get()을 붙이면 null이 아닌경우 그
+                                                                         // 값을 가져오고, null 인경우 예외를 반환한다.
         assertThat(domain).isEqualTo(result);
     }
 

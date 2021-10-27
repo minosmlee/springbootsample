@@ -3,25 +3,27 @@ package smlee.springbootsample.service;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import smlee.springbootsample.domain.SampleDomain;
-import smlee.springbootsample.repository.SampleMemoryRepository;
+import smlee.springbootsample.repository.SampleRepository;
 
+@Transactional
 @Service
 @RequiredArgsConstructor // 모든 final이 선언된 모든 필드에 대해 생성자 주입방식의 Bean 주입을 대신해준다. @Autowired를 사용할 필요가없다.
 public class SampleService {
 
-    private final SampleMemoryRepository repository;
+    private final SampleRepository repository;
 
     public Long validateDuplicationOnSave(SampleDomain domain) {
 
         // 중복된 attr을 가진 domain이 저장되는것을 방지하는 로직
-        repository.findByAttr(domain.getAttr())
-                .ifPresent(_domain -> {
-                    throw new IllegalStateException("Already existing domain");
-                });
+        repository.findByAttr(domain.getAttr()).ifPresent(_domain -> {
+            throw new IllegalStateException("Already existing domain");
+        });
 
         repository.save(domain);
 
