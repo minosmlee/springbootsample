@@ -16,6 +16,8 @@ import smlee.springbootsample.repository.SampleRepository;
 @RequiredArgsConstructor // 모든 final이 선언된 모든 필드에 대해 생성자 주입방식의 Bean 주입을 대신해준다. @Autowired를 사용할 필요가없다.
 public class SampleService {
 
+    // SampleConfig.java 에서 정의한 SampleRepository Bean을 주입받는다.
+    // SampleRepository를 Bean으로 생성할 때 원하는 타입의 Repository를 이용해 초기화 할 수 있다.
     private final SampleRepository repository;
 
     public Long validateDuplicationOnSave(SampleDomain domain) {

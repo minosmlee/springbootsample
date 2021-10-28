@@ -20,8 +20,8 @@ class SampleJpaRepositoryTest {
     @Test
     // @Commit // @Commit은 Rollback을 수행하지 않고 DB에 기록한다.
     public void save() {
-        SampleDomain domain = new SampleDomain();
-        domain.setAttr("test attr");
+        String attr = "test attr";
+        SampleDomain domain = SampleDomain.builder().attr(attr).build();
         repository.save(domain);
 
         // Optional 객체가 반환될때 .get()을 붙이면 null이 아닌경우 그값을 가져오고, null 인경우 예외를 반환한다.
@@ -31,12 +31,12 @@ class SampleJpaRepositoryTest {
 
     @Test
     public void findByAttr() {
-        SampleDomain domain1 = new SampleDomain();
-        domain1.setAttr("test attr1");
+        String attr1 = "test attr 1";
+        SampleDomain domain1 = SampleDomain.builder().attr(attr1).build();
         repository.save(domain1);
 
-        SampleDomain domain2 = new SampleDomain();
-        domain2.setAttr("test attr2");
+        String attr2 = "test attr 2";
+        SampleDomain domain2 = SampleDomain.builder().attr(attr2).build();
         repository.save(domain2);
 
         // entity1의 attr로 찾은 객체가 entity2와 다른것을 점검

@@ -29,8 +29,10 @@ class SampleServiceTest {
 
     @Test
     public void validateDuplicationOnSave() {
-        SampleDomain domain = new SampleDomain();
-        domain.setAttr("test attr");
+        String attr = "test attr";
+        SampleDomain domain = SampleDomain.builder()
+                .attr(attr)
+                .build();
 
         Long savedId = service.validateDuplicationOnSave(domain);
 
